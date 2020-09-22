@@ -9,34 +9,29 @@
 <body>
 
 	<div id="app">
+
+		<h1>{{message}}</h1>
 		
 		<div class="form-group">
-			<label for="InputEmail">Your height:</label>
-			<input type="text" class="form-control"  id="InputEmail" v-model="feets" aria-describedby="emailHelp">(feets)
+
+			<label>Your height:</label>
+			<input type="text" name="feet" v-model="feet">(feets)
+			<input type="text" name="inch" v-model="inch">(inches)<br><br>
+
+		
+			<label>Your Weight:</label>
+			<input type="text" name="weight" v-model="weight">(pounds)<br>
+
+			<button v-on:click="bmicalculation"> Calculate</button>
 
 		</div><br><br>
 
-		<div class="form-group">
-			<label for="inches">Your height:</label>
-			<input type="text" class="form-control" id="inches" v-model="inches">(inches)
+			<label>BMI:</label>
+			<input type="text" id="aa" v-model="bmi"><br><br>
 
-		</div><br><br>
-
-		<div class="form-group">
-			<label for="weight">Your Weight:</label>
-			<input type="text" class="form-control" id="weight" v-model="in" v-model="model">(pounds)
-
-		</div><br><br>
-
-			<button type="submit" class="btn btn-success" v-on:click="bmicalculation"> Calculate</button>
-
-
-			<label for="bmi">BMI result</label>
-			<input type="text" name="bmi" id="bmi" v-model="bmi"><br><br>
-
-			<div class="mydiv" style="display: flex;">
-				<button style="background-color: red;">UnderWeight(<18.5)</button>
-				<button style="background-color: yellow;">Normal(<18.5-24.9)</button>
+			<div class="mydiv" style="display: flex">
+				<button style="background-color: red">UnderWeight(<18.5)</button>
+				<button style="background-color: yellow;">NormalWeight(18.5-24.9)</button>
 				<button style="background-color: green;">OverWeight(25-29.9)</button>
 				<button style="background-color: blue;">Obese(>30)</button>
 			</div>
@@ -48,37 +43,39 @@
 		var app = new Vue({
 			el:'#app',
 			data:{
-				feets:'',
-				inches:'',
+				message:'BMI Calculator',
+				feet:'',
+				inch:'',
 				weight:'',
 				bmi:''
 
 			},
 			methods:{
 				bmicalculation:function () {
-					var feets =parseInt(this.feets);
-					var inches=parseInt(this.inches);
-					var inches1=parseInt(this.feets)*12;
+					var feets =parseInt(this.feet);
+					var inches=parseInt(this.inch);
+					var inches1=feets*12;
 					var height = inches+inches1;
-					var weight = parseInt(this.weight);
-					var total = ((weight/(height*height))*703).toFixed(1);
+					var weights = parseInt(this.weight);
+					var total = ((weights/(height*height))*703).toFixed(1);
 					this.bmi=total;
+
 					if(total < 18.5){
-						$("#bmi").css("background-color","red");
+						$("#aa").css("background-color","red");
 					}
 					else if (total >=18.5 && total <24.9) {
-						$("#bmi").css("background-color","yellow");
+						$("#aa").css("background-color","yellow");
 						
 					}
 					else if (total >=25 && total <29.9){
-						$("#bmi").css("background-color","green");			
+						$("#aa").css("background-color","green");			
 					}
 					else{
-						$("#bmi").css("background-color","blue");
+						$("#aa").css("background-color","blue");
 					}
 					
 				}
-			}
+			},
 
 
 		})
